@@ -36,12 +36,13 @@ class App extends React.Component {
 
 class Icon extends React.Component {
     render() {
+    console.log(this.props.size)
         return (
             <SVGInline
                 className={this.props.className || "icon"}
                 classSuffix={this.props.classSuffix || ""}
-                width={(this.props.width || this.props.size || 16) + ""}
-                height={(this.props.height || this.props.size || 16) + ""}
+                width={(this.props.width || this.props.size || 16) + "px"}
+                height={(this.props.height || this.props.size || 16) + "px"}
                 fill={this.props.fill}
                 style={this.props.style}
                 svg={require(`raw-loader!./icons/${this.props.icon}.svg`)}
