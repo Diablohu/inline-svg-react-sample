@@ -36,7 +36,6 @@ class App extends React.Component {
 
 class Icon extends React.Component {
     render() {
-    console.log(this.props.size)
         return (
             <SVGInline
                 className={this.props.className || "icon"}
