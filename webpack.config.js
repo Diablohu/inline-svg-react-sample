@@ -1,11 +1,15 @@
-const path = require('path');
+const path = require('path')
+const fs = require('fs')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 
 module.exports = {
-    entry: './src/client.js',
+    entry: {
+        'sample-1': path.resolve('./src/sample-1/client.js'),
+        'sample-2': path.resolve('./src/sample-2/client.js')
+    },
     output: {
         path: path.resolve('dist'),
-        filename: 'bundle.js'
+        filename: '[name].js'
     },
     module: {
         loaders: [
@@ -20,9 +24,22 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: './src/index.html',
+            template: path.resolve('./src/sample-1/index.ejs'),
+            filename: 'sample-1.html',
+            inject: false,
+            bundle: "sample-1.js"
+        }),
+        new HtmlWebpackPlugin({
+            template: path.resolve('./src/sample-2/index.ejs'),
+            filename: 'sample-2.html',
+            inject: false,
+            svgs: fs.readFileSync(path.resolve('./src/sample-2/icons/symbol-defs.svg'), 'utf-8'),
+            bundle: "sample-2.js"
+        }),
+        new HtmlWebpackPlugin({
+            template: path.resolve('./src/index.html'),
             filename: 'index.html',
-            inject: 'body'
+            inject: false
         })
     ]
 }
